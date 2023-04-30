@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { createUser } = require("../controllers/userController");
+const { createUser,login } = require("../controllers/userController");
 const {
   createItinerary,
   getItinerary,
@@ -14,6 +14,7 @@ router.post("/createUser", createUser);
 
 //Intinerary
 router.post("/createItinerary", createItinerary);
+router.post("/login",login)
 router.get("/getItinerary/:id", getItinerary);
 router.put("/updateItinerary/:id", updateItinerary);
 
