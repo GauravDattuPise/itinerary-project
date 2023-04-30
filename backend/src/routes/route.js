@@ -1,11 +1,21 @@
-const express = require('express')
+const express = require("express");
 const router = express.Router();
 
-const {createUser} = require('../controllers/userController')
+const { createUser } = require("../controllers/userController");
+const {
+  createItinerary,
+  getItinerary,
+  updateItinerary,
+  deleteItinerary,
+} = require("../controllers/intineraryController");
 
-router.post("/createUser", createUser)
+//User
+router.post("/createUser", createUser);
 
-module.exports = router
+//Intinerary
+router.post("/createItinerary", createItinerary);
+router.get("/getItinerary/:id", getItinerary);
+router.put("/updateItinerary/:id", updateItinerary);
 
-
-
+router.delete("/deleteItinerary/:id", deleteItinerary);
+module.exports = router;

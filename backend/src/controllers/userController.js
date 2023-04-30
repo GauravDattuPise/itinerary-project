@@ -1,6 +1,6 @@
 const userModel = require("../models/userModel");
 
-const createUser = async (req,res) =>{
+exports.createUser = async (req,res) =>{
 
     try {
         let data = req.body
@@ -11,4 +11,15 @@ const createUser = async (req,res) =>{
     }
 
 } 
-module.exports = {createUser}
+
+exports.login = async(req, res) => {
+    try {
+
+        let {userName, password} = req.body
+
+        let user = await userModel.findOne({userName:userName,password:password })
+        
+    } catch (error) {
+        return res.status(500).send({status : false, message : error.message})
+    }
+}
