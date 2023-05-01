@@ -7,6 +7,8 @@ const {
   getItinerary,
   updateItinerary,
   deleteItinerary,
+  getSuggestedActivitiesAndAccommodations,
+
 } = require("../controllers/intineraryController");
 
 //User
@@ -19,4 +21,8 @@ router.get("/getItinerary/:id", getItinerary);
 router.put("/updateItinerary/:id", updateItinerary);
 
 router.delete("/deleteItinerary/:id", deleteItinerary);
+
+router.get("/suggested",getSuggestedActivitiesAndAccommodations );
+
+
 module.exports = router;

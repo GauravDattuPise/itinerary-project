@@ -1,5 +1,6 @@
 const itineraryModel = require("../models/itinerarayModel");
 const userModel = require("../models/userModel");
+const axios = require("axios");
 
 exports.createItinerary = async (req, res) => {
   try {
@@ -87,5 +88,39 @@ exports.deleteItinerary = async (req, res) => {
     res.status(204).send();
   } catch (error) {
     res.status(500).send({ status: false, message: error.message });
+  }
+};
+
+exports.getSuggestedActivitiesAndAccommodations = async (req, res) => {
+  try {
+    const { destination, startDate, endDate } = req.query;
+
+    const response = await axios.get(
+      `https://api.example.com/suggestions?destination=${destination}&startDate=${startDate}&endDate=${endDate}`
+    );
+
+    // If the response status is not 200 OK, return an error response
+    if (response.status !== 200) {
+      return res.status(response.status).send({
+        status: false,
+        message:
+          "Failed to get suggested activities and accommodations from third-party API",
+      });
+    }
+
+    const { activities, accommodations } = response.data;
+  
+    res.status(200).send({
+      status: true,
+      data: {
+        activities,
+        accommodations,
+      },
+    });
+  } catch (error) {
+    res.status(500).send({
+      status: false,
+      message: error.message,
+    });
   }
 };
